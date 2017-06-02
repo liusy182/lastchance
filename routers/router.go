@@ -9,4 +9,5 @@ func init() {
 	beego.Router("/", &controllers.MainController{})
 	beego.AutoRouter(&controllers.AccountController{})
 	beego.AutoRouter(&controllers.SecurityController{})
+	beego.Include(&controllers.BankingController{})
 }
