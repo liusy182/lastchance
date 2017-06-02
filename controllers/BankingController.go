@@ -20,6 +20,20 @@ func (c *BankingController) URLMapping() {
 
 // @router /banking [get]
 func (c *BankingController) ShowAccounts() {
+	c.Data["accounts"] = []models.Account{
+		models.Account{
+			ID:     1,
+			Name:   "Checking",
+			Number: "8888",
+			Amount: 45.22,
+		},
+		models.Account{
+			ID:     2,
+			Name:   "Saving",
+			Number: "1234",
+			Amount: 12.4,
+		},
+	}
 	c.TplName = "banking.tpl"
 }
 
