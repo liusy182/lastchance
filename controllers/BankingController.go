@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/validation"
 	"github.com/liusy182/lastchance/models"
 )
 
@@ -26,7 +27,18 @@ func (c *BankingController) ShowAccounts() {
 func (c *BankingController) Transfer() {
 	var transfer models.Transfer
 	json.Unmarshal(c.Ctx.Input.RequestBody, &transfer)
-	fmt.Println(c.Ctx.Input.RequestBody)
 	fmt.Println(transfer)
-	c.Ctx.WriteString("success")
+	valid := validation.Validation{}
+	isValid, _ := valid.Valid(&transfer)
+	fmt.Println(valid.ErrorMap())
+
+	var message string
+
+	if isValid {
+		message = "success"
+	} else {
+		message = "failure"
+	}
+
+	c.Ctx.WriteString(message)
 }
