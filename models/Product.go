@@ -19,3 +19,9 @@ type Product struct {
 func init() {
 	orm.RegisterModel(new(Product))
 }
+
+func (p *Product) TableIndex() [][]string {
+	return [][]string{
+		[]string{"SerialNumber", "LastOrdered"},
+	}
+}
