@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/context"
 	"github.com/astaxie/beego/validation"
 	"github.com/liusy182/lastchance/models"
 )
@@ -55,4 +56,31 @@ func (c *BankingController) Transfer() {
 	}
 
 	c.Ctx.WriteString(message)
+}
+
+// @router /api/lifecycle [get]
+func (c *BankingController) ShowLifecycle() {
+	fmt.Println("Action Execution")
+}
+
+func (c *BankingController) Init(ctx *context.Context,
+	controllerName, actionName string, app interface{}) {
+	fmt.Printf("Initialization, %s:%s\n", controllerName, actionName)
+	c.Controller.Init(ctx, controllerName, actionName, app)
+}
+
+func (c *BankingController) Prepare() {
+	fmt.Printf("Prepare\n")
+	c.Controller.Prepare()
+}
+
+func (c *BankingController) Render() error {
+	fmt.Printf("Render\n")
+	c.Ctx.WriteString("result")
+	return nil
+}
+
+func (c *BankingController) Finish() {
+	fmt.Printf("Finish\n")
+	c.Controller.Finish()
 }
