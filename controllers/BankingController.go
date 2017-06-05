@@ -76,7 +76,7 @@ func (c *BankingController) Prepare() {
 
 func (c *BankingController) Render() error {
 	fmt.Printf("Render\n")
-	c.Ctx.WriteString("result")
+	// c.Ctx.WriteString("result")
 	return nil
 }
 
